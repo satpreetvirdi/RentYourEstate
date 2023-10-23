@@ -35,7 +35,7 @@ const LoginModal = () => {
         }
     } = useForm<FieldValues>({
         defaultValues: {
-            email: "",
+            name:"",
             password: ""
         }
     });
@@ -43,12 +43,12 @@ const LoginModal = () => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
 
-        signIn('credentials',{
+        signIn("credentials",{
             ...data,
             redirect:false,
 
         })
-        .then((callback)=>{
+        .then(callback=>{
             setIsLoading(false);
             if(callback?.ok){
                 toast.success("Logged In Successfully");
@@ -57,6 +57,7 @@ const LoginModal = () => {
             }
 
             if(callback?.error){
+               
                 toast.error(callback.error);
             }
         })
@@ -70,14 +71,16 @@ const LoginModal = () => {
                 disabled={isLoading}
                 errors={errors}
                 register={register}
+                required
             />
 
-            <Inputs id="Password"
+            <Inputs id="password"
                 label="Password"
-                type="password"
+                type="password" 
                 disabled={isLoading}
                 errors={errors}
                 register={register}
+                required
             />
         </div>
     )
