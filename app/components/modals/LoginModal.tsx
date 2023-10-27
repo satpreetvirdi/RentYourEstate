@@ -62,7 +62,10 @@ const LoginModal = () => {
             }
         })
     }
-
+    const toggle = useCallback(()=>{
+    LoginModal.onClose();
+    registerModal.onOpen();
+    },[LoginModal,registerModal]);
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <Heading title="Welcome Back" subtitle="Login to your accoount!" />
@@ -108,15 +111,15 @@ const LoginModal = () => {
           font-light
         "
       >
-        <p>Already have an account?
+        <p>Did'nt have an account?
           <span 
-            onClick={registerModal.onClose} 
+            onClick={toggle} 
             className="
               text-neutral-800
               cursor-pointer 
               hover:underline
             "
-            > Log in</span>
+            > Create an account </span>
         </p>
       </div>
      </div>
