@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import Heading from "../Heading";
 import  {categories}  from '../navbar/Categories';
 import CategoryInput from "../inputs/CategoryInput";
+import { FieldValue, FieldValues, useForm } from "react-hook-form";
 enum STEPS{ 
   CATEGORY =0,
   LOCATION =1,
@@ -17,6 +18,39 @@ enum STEPS{
 const RentModal = () => {
     const rentModal = useRentModal();
     const [steps , setSteps] = useState(STEPS.CATEGORY);
+
+    const {
+      register,
+      handleSubmit,
+      setValue,
+      watch,
+      formState:{
+        errors,
+      },
+      reset
+    } = useForm<FieldValues>({
+      defaultValues:{
+      category:'' ,
+      location:null,
+      guestCount:1,
+      roomCount:1,
+      bathroomCount:1,
+      imageSrc:'',
+      price:1,
+      title:'',
+      description:''
+    }
+    });
+    
+    const category = watch('category');
+    
+    const setCustomValues = (id:string, value :any)=>{
+      setValue(id,value,{
+        shouldValidate:true,
+        shouldDirty:true,
+        shouldTouch:true
+      })
+    }
 
     const onBack = ()=>{
       setSteps((value)=>value-1);
@@ -37,7 +71,7 @@ const RentModal = () => {
           return undefined;
         }
         return "Back";
-      },[steps])
+      },[steps]);
 
       let bodyContent = (
         <div className="flex flex-col gap-8">
@@ -57,12 +91,14 @@ const RentModal = () => {
           >
             {categories.map((item) => (
               <div key={item.label} className="col-span-1">
-                {/* <CategoryInput
-                  onClick={()=>{}}
-                  selected={false}
+                <CategoryInput
+                  onClick={(category)=>{
+                    setCustomValues('category',category);
+                  }}
+                  selected={category == item.label}
                   label={item.label}
                   icon={item.icon}
-                /> */}
+                />
               </div>
             ))}
           </div>
@@ -78,6 +114,7 @@ const RentModal = () => {
     secondaryActionLabel={secondaryActionLabel}
     secondaryAction = {steps===STEPS.CATEGORY ? undefined : onBack}
     title="Airbnb your home"
+    body={bodyContent}
     />
   )
 }
