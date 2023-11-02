@@ -3,8 +3,9 @@ import ClientOnly from './components/ClientOnly'
 import Container from './components/Container'
 import EmptyState from './components/EmptyState';
 import getListings from './actions/getListings';
-import ListingCard from './components/listings/ListingCard';
+
 import getCurrentUser from './actions/getCurrentUser';
+import ListingCard from './components/listings/ListingCard';
 
 export default async function Home() {
   
@@ -35,7 +36,7 @@ export default async function Home() {
           "
         >
         
-          {listings.map((listing: any) => (
+          {listings.map((listing) => (
             <ListingCard
               currentUser={currentUser}
               key={listing.id}
