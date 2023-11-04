@@ -1,6 +1,8 @@
-"use client"
-import useCountries from "@/app/hooks/useCountries";
-import Select from "react-select";
+'use client';
+
+import Select from 'react-select'
+
+import useCountries from '@/app/hooks/useCountries';
 
 export type CountrySelectValue = {
   flag: string;
@@ -15,19 +17,20 @@ interface CountrySelectProps {
   onChange: (value: CountrySelectValue) => void;
 }
 
-const CountrySelect : React.FC<CountrySelectProps> = ({
+const CountrySelect: React.FC<CountrySelectProps> = ({
   value,
   onChange
 }) => {
-  const {getAll} = useCountries();
-  return (
+  const { getAll } = useCountries();
+
+  return ( 
     <div>
-      <Select 
+      <Select
         placeholder="Anywhere"
         isClearable
         options={getAll()}
         value={value}
-        onChange={(value)=> onChange(value as CountrySelectValue)}
+        onChange={(value) => onChange(value as CountrySelectValue)}
         formatOptionLabel={(option: any) => (
           <div className="
           flex flex-row items-center gap-3">
@@ -56,7 +59,7 @@ const CountrySelect : React.FC<CountrySelectProps> = ({
         })}
       />
     </div>
-  )
+   );
 }
-
-export default CountrySelect
+ 
+export default CountrySelect;

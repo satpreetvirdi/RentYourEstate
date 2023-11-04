@@ -1,21 +1,21 @@
-'use client'
+'use client';
 
-import { IconType } from "react-icons/lib";
+import { IconType } from "react-icons";
 
-interface CategoryInputProps{
-    icon:IconType;
-    label:string;
-    selected?:boolean;
-    onClick: (value:string)=>void;
+interface CategoryBoxProps {
+  icon: IconType,
+  label: string;
+  selected?: boolean;
+  onClick: (value: string) => void;
 }
 
-const CategoryInput:React.FC<CategoryInputProps> = ({
-    icon:Icon,
-    label,
-    selected,
-    onClick
+const CategoryBox: React.FC<CategoryBoxProps> = ({
+  icon: Icon,
+  label,
+  selected,
+  onClick
 }) => {
-  return (
+  return ( 
     <div
       onClick={() => onClick(label)}
       className={`
@@ -36,7 +36,7 @@ const CategoryInput:React.FC<CategoryInputProps> = ({
         {label}
       </div>
     </div>
-  )
+   );
 }
-
-export default CategoryInput
+ 
+export default CategoryBox;
