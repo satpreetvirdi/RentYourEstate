@@ -28,7 +28,7 @@ export default async function getListings(
 
     let query: any = {};
 
-    if (userId!== undefined || userId!==null) {
+    if (userId) {
       query.userId = userId;
     }
 
